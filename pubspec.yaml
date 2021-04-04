@@ -1,0 +1,20 @@
+name: plural_noun
+description: Converts a singular noun to a plural noun using a set of rules. This works fine for most nouns, but note that some exceptions might not be covered, resulting in invalid conversions.
+version: 0.0.1
+author: Nils ten Hoeve
+homepage:
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  collection: ^1.14.13
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
