@@ -10,5 +10,5 @@ main() {
   print(PluralRules().convertToPluralNoun('TAX'));
   //prints TAXES
 
-  // For more examples see:
+  // For more examples see: https://github.com/efficientyboosters/plural_noun/blob/main/test/plural_noun_test.dart
 }

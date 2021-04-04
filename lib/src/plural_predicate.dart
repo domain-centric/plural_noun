@@ -1,5 +1,4 @@
-import 'package:plural_noun/src/plural_converter.dart';
-import 'package:plural_noun/src/plural_rule.dart';
+import 'package:plural_noun/plural_noun.dart';
 
 abstract class PluralPredicate {
   bool appliesTo(String noun);

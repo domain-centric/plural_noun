@@ -1,8 +1,8 @@
 name: plural_noun
 description: Converts a singular noun to a plural noun using a set of rules. This works fine for most nouns, but note that some exceptions might not be covered, resulting in invalid conversions.
 version: 0.0.1
-author: Nils ten Hoeve
-homepage:
+homepage: https://github.com/efficientyboosters/plural_noun
+repository: https://github.com/efficientyboosters/plural_noun
 
 environment:
   sdk: ">=2.7.0 <3.0.0"

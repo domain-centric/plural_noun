@@ -657,7 +657,7 @@ void main() {
     });
   });
 
-  group('Test letter case',() {
+  group('Test letter case', () {
     test('Starts with lower case', () {
       expect(PluralRules().convertToPluralNoun('mouse'), 'mice');
     });

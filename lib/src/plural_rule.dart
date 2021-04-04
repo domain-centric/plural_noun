@@ -1,7 +1,5 @@
 import 'package:collection/collection.dart';
-import 'package:plural_noun/src/letter_case.dart';
-import 'package:plural_noun/src/plural_converter.dart';
-import 'package:plural_noun/src/plural_predicate.dart';
+import 'package:plural_noun/plural_noun.dart';
 
 class PluralRule {
   final PluralPredicate _predicate;
