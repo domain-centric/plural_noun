@@ -1,6 +1,6 @@
 name: plural_noun
-description: Converts a singular noun to a plural noun using a set of rules. This works fine for most nouns, but note that some exceptions might not be covered, resulting in invalid conversions.
-version: 0.0.1
+description: Converts a English singular noun to a plural noun using a set of rules.
+version: 0.0.2
 homepage: https://github.com/efficientyboosters/plural_noun
 repository: https://github.com/efficientyboosters/plural_noun
 

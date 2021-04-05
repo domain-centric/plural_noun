@@ -1,6 +1,7 @@
 # plural_noun
 
-Converts a English singular noun to a plural noun using a set of rules. This works fine for most nouns, but note that some exceptions might not convert correctly.
+Converts a English singular noun to a plural noun using a set of rules.
+This works fine for most nouns, but note that some exceptions might not convert correctly.
 
 ## Usage
 

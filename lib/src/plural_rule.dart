@@ -1,6 +1,10 @@
 import 'package:collection/collection.dart';
 import 'package:plural_noun/plural_noun.dart';
 
+/// A [PluralRule] checks if a condition ([PluralPredicate]) applies for an singular noun.
+/// If so, the singular noun can be converted to the plural form using a [PluralConverter]
+/// This class has several static methods that are part of a [fluent interface](https://en.wikipedia.org/wiki/Fluent_interface)
+/// See [PluralRules] for implementations
 class PluralRule {
   final PluralPredicate _predicate;
   final PluralConverter _converter;
@@ -27,7 +31,9 @@ class PluralRule {
 const _consonantExpression = '[b-df-hj-np-tv-z]';
 const _endExpression = '\$';
 
-///Based on https://www.grammarly.com/blog/plural-nouns/
+/// A collection of rules to convert an English single noun to the plural form.
+/// It also has a convertToPluralNoun method for the actual conversion
+/// These rules are based on https://www.grammarly.com/blog/plural-nouns/
 class PluralRules extends DelegatingList<PluralRule>
     implements PluralConverter {
   PluralRules()
