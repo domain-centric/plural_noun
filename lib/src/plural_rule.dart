@@ -165,7 +165,8 @@ class PluralRules extends DelegatingList<PluralRule>
     String trimmedSingularNoun = singularNoun.trim();
     CaseType caseType = CaseTypes().findFor(trimmedSingularNoun);
     String normalizedSingularNoun = trimmedSingularNoun.toLowerCase();
-    var rule = firstWhere((rule) => rule.appliesTo(normalizedSingularNoun));
+    PluralRule rule =
+        firstWhere((rule) => rule.appliesTo(normalizedSingularNoun));
     var pluralNoun = rule.convertToPluralNoun(normalizedSingularNoun);
     var casedPluralNoun = caseType.convert(pluralNoun);
     return casedPluralNoun;

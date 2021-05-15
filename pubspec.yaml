@@ -1,17 +1,16 @@
 name: plural_noun
 description: Converts a English singular noun to a plural noun using a set of rules.
-version: 0.0.2
+version: 0.1.1
 homepage: https://github.com/efficientyboosters/plural_noun
 repository: https://github.com/efficientyboosters/plural_noun
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
-  flutter: ">=1.17.0"
+  sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
-  collection: ^1.14.13
+  collection: ^1.15.0
 
 dev_dependencies:
   flutter_test:
