@@ -1,6 +1,6 @@
 # plural_noun
 
-Converts a English singular noun to a plural noun using a set of rules.
+Converts an English singular noun to a plural noun using a set of rules.
 This works fine for most nouns, but note that some exceptions might not convert correctly.
 
 ## Usage
@@ -19,5 +19,5 @@ main() {
   print(PluralRules().convertToPluralNoun('TAX'));
   //prints TAXES
 
-  // For more examples see: https://github.com/efficientyboosters/plural_noun/blob/main/test/plural_noun_test.dart
+  // For more examples see: https://github.com/domain-centric/plural_noun/blob/main/test/plural_noun_test.dart
 }```
