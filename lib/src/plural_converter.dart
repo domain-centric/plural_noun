@@ -4,16 +4,7 @@ abstract class PluralConverter {
   String convertToPluralNoun(String singularNoun);
 }
 
-/// Appends a suffix to the given noun to make it plural
-/// E.g. adds an s to car.
-class AppendConverter implements PluralConverter {
-  final String suffix;
 
-  AppendConverter(this.suffix);
-
-  @override
-  String convertToPluralNoun(String singularNoun) => singularNoun + suffix;
-}
 
 /// Returns the same noun, since the singular noun is the same as a plural noun.
 /// E.g.: deer
@@ -42,9 +33,20 @@ class ReplaceSuffixConverter extends PluralConverter {
   final String suffixReplacement;
 
   ReplaceSuffixConverter(String suffixExpressionToFind, this.suffixReplacement)
-      : suffixExpression = RegExp(suffixExpressionToFind + "\$");
+      : suffixExpression = RegExp("$suffixExpressionToFind\$");
 
   @override
   String convertToPluralNoun(String singularNoun) =>
       singularNoun.replaceAll(suffixExpression, suffixReplacement);
+}
+
+/// Appends a suffix to the given noun to make it plural
+/// E.g. adds an s to car.
+class AppendConverter implements PluralConverter {
+  final String suffix;
+
+  AppendConverter(this.suffix);
+
+  @override
+  String convertToPluralNoun(String singularNoun) => singularNoun + suffix;
 }

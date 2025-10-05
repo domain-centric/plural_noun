@@ -1,5 +1,3 @@
-import 'package:collection/collection.dart';
-
 /// An [CaseType] implementation checks if a text matches the [CaseType] and can convert a text in this [CaseType]
 abstract class CaseType {
   bool matches(String text);
@@ -9,6 +7,7 @@ abstract class CaseType {
 
 /// A text that starts with an Upper case character
 class _StartsWithUpperCase extends CaseType {
+  @override
   bool matches(String text) {
     if (text.isEmpty) {
       return false;
@@ -33,6 +32,7 @@ class _StartsWithUpperCase extends CaseType {
 
 /// a text that starts with an lower case character
 class _StartsWithLowerCase extends CaseType {
+  @override
   bool matches(String text) {
     if (text.isEmpty) {
       return false;
@@ -57,6 +57,7 @@ class _StartsWithLowerCase extends CaseType {
 
 /// A TEXT WHERE ALL CHARACTERS ARE IN UPPER CASE
 class _AllUpperCase extends CaseType {
+  @override
   bool matches(String text) => text.toUpperCase() == text;
 
   @override
@@ -65,6 +66,7 @@ class _AllUpperCase extends CaseType {
 
 /// a text where all characters are in lower case
 class _AllLowerCase extends CaseType {
+  @override
   bool matches(String text) => text.toLowerCase() == text;
 
   @override
@@ -72,16 +74,12 @@ class _AllLowerCase extends CaseType {
 }
 
 /// a list of [CaseType]s with a method to find a matching [CaseType]
-class CaseTypes extends DelegatingList<CaseType> {
-  CaseTypes()
-      : super([
-          _AllLowerCase(),
-          _AllUpperCase(),
-          _StartsWithLowerCase(),
-          _StartsWithUpperCase(),
-        ]);
+List<CaseType> caseTypes = [
+  _AllLowerCase(),
+  _AllUpperCase(),
+  _StartsWithLowerCase(),
+  _StartsWithUpperCase(),
+];
 
-  CaseType findFor(String text) {
-    return firstWhere((caseType) => caseType.matches(text));
-  }
-}
+CaseType findCaseTypeFor(String text) =>
+    caseTypes.firstWhere((caseType) => caseType.matches(text));

@@ -5,16 +5,16 @@ import 'package:plural_noun/plural_noun.dart';
 abstract class PluralPredicate {
   bool appliesTo(String singularNoun);
 
-  PluralRule noChange() => PluralRule(this, NoChangeConverter());
+  PluralRule noChange() => ConditionalPluralRule(this, NoChangeConverter());
 
   PluralRule replaceWith(String pluralNoun) =>
-      PluralRule(this, ReplaceConverter(pluralNoun));
+      ConditionalPluralRule(this, ReplaceConverter(pluralNoun));
 
   PluralRule replaceSuffix(String suffixToFind, String suffixReplacement) =>
-      PluralRule(this, ReplaceSuffixConverter(suffixToFind, suffixReplacement));
+      ConditionalPluralRule(this, ReplaceSuffixConverter(suffixToFind, suffixReplacement));
 
   PluralRule appendWith(String suffixToAppend) =>
-      PluralRule(this, AppendConverter(suffixToAppend));
+      ConditionalPluralRule(this, AppendConverter(suffixToAppend));
 }
 
 /// Checks if a singular noun end with a given suffix

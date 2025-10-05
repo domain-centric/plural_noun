@@ -21,3 +21,7 @@ main() {
 
   // For more examples see: https://github.com/domain-centric/plural_noun/blob/main/test/plural_noun_test.dart
 }```
+
+You can also:
+* Append to existing rules: See [append_to_existing_rules_example.dart](https://github.com/domain-centric/plural_noun/blob/example/append_to_existing_rules_example.dart)
+* Create rules for other languages: See [spanish_rules_example.dart](https://github.com/domain-centric/plural_noun/blob/example/spanish_rules_example.dart)

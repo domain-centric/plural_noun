@@ -1,16 +1,11 @@
-import 'package:collection/collection.dart';
 import 'package:plural_noun/plural_noun.dart';
 
 /// A [PluralRule] checks if a condition ([PluralPredicate]) applies for an singular noun.
 /// If so, the singular noun can be converted to the plural form using a [PluralConverter]
-/// This class has several static methods that are part of a [fluent interface](https://en.wikipedia.org/wiki/Fluent_interface)
-/// See [PluralRules] for implementations
-class PluralRule {
-  final PluralPredicate _predicate;
-  final PluralConverter _converter;
-
-  PluralRule(this._predicate, this._converter);
-
+/// This interface has several static methods that are part of
+/// a [fluent interface](https://en.wikipedia.org/wiki/Fluent_interface)
+/// See [englishBasicPluralRules] for example implementation
+abstract class PluralRule {
   static PluralPredicate ifEndsWith(String suffix) => EndsWithPredicate(suffix);
 
   static PluralPredicate ifMatchedRegexp(String regexp) =>
@@ -19,156 +14,220 @@ class PluralRule {
   static PluralPredicate ifMatches(String singularNoun) =>
       ComparesPredicate(singularNoun);
 
-  static PluralRule appendSuffix(String suffix) =>
-      PluralRule(AllPredicate(), AppendConverter(suffix));
+  static PluralRule appendSuffix(String suffix) => AppendSuffix(suffix);
 
-  bool appliesTo(String noun) => _predicate.appliesTo(noun);
+  bool appliesTo(String singularNoun);
 
-  String convertToPluralNoun(String singularNoun) =>
-      _converter.convertToPluralNoun(singularNoun);
+  String convertToPluralNoun(String singularNoun);
 }
 
-const _consonantExpression = '[b-df-hj-np-tv-z]';
-const _endExpression = '\$';
+class PluralRuleSet implements PluralRule {
+  final List<PluralRule> rules;
 
-/// A collection of rules to convert an English single noun to the plural form.
-/// It also has a convertToPluralNoun method for the actual conversion
-/// These rules are based on https://www.grammarly.com/blog/plural-nouns/
-class PluralRules extends DelegatingList<PluralRule>
-    implements PluralConverter {
-  PluralRules()
-      : super([
-          //nouns that don’t change
-          PluralRule.ifMatches('aircraft').noChange(),
-          PluralRule.ifMatches('bass').noChange(),
-          PluralRule.ifMatches('bison').noChange(),
-          PluralRule.ifMatches('buffalo').noChange(),
-          PluralRule.ifMatches('cod').noChange(),
-          PluralRule.ifMatches('deer').noChange(),
-          PluralRule.ifMatches('elk').noChange(),
-          PluralRule.ifMatches('fish').noChange(),
-          PluralRule.ifMatches('grass').noChange(),
-          PluralRule.ifMatches('hair').noChange(),
-          PluralRule.ifMatches('mud').noChange(),
-          PluralRule.ifMatches('moose').noChange(),
-          PluralRule.ifMatches('series').noChange(),
-          PluralRule.ifMatches('series').noChange(),
-          PluralRule.ifMatches('sheep').noChange(),
-          PluralRule.ifMatches('shrimp').noChange(),
-          PluralRule.ifMatches('spacecraft').noChange(),
-          PluralRule.ifMatches('species').noChange(),
-          PluralRule.ifMatches('salmon').noChange(),
-          PluralRule.ifMatches('swine').noChange(),
-          PluralRule.ifMatches('trout').noChange(),
-          PluralRule.ifMatches('quail').noChange(),
+  PluralRuleSet(this.rules);
 
-          // Plural Irregular Nouns
-          PluralRule.ifMatches('alumna').replaceWith('alumnae'),
-          PluralRule.ifMatches('bacillus').replaceWith('bacilli'),
-          PluralRule.ifMatches('child').replaceWith('children'),
-          PluralRule.ifMatches('die').replaceWith('dice'),
-          PluralRule.ifMatches('foot').replaceWith('feet'),
-          PluralRule.ifMatches('goose').replaceWith('geese'),
-          PluralRule.ifMatches('louse').replaceWith('lice'),
-          PluralRule.ifMatches('man').replaceWith('men'),
-          PluralRule.ifMatches('minutia').replaceWith('minutiae'),
-          PluralRule.ifMatches('mouse').replaceWith('mice'),
-          PluralRule.ifMatches('ox').replaceWith('oxen'),
-          PluralRule.ifMatches('person').replaceWith('people'),
-          PluralRule.ifMatches('tooth').replaceWith('teeth'),
-          PluralRule.ifMatches('woman').replaceWith('women'),
+  /// This method is part of a [Fluent interface](https://en.wikipedia.org/wiki/Fluent_interface)
+  /// Note that this method returns a modified copy!
+  PluralRuleSet addNounsThatDoesNotChange(List<String> nounsThatDoNotChange) {
+    var newRule = NounsThatDoNotChange([
+      ...nounsThatDoNotChange.map((noun) => normalize(noun)),
+    ]);
+    var newRules = [newRule, ...rules];
+    return PluralRuleSet(newRules);
+  }
 
-          // exceptions on replace -f with -ves
-          PluralRule.ifMatches('belief').appendWith('s'),
-          PluralRule.ifMatches('brief').appendWith('s'),
-          PluralRule.ifMatches('chef').appendWith('s'),
-          PluralRule.ifMatches('chief').appendWith('s'),
-          PluralRule.ifMatches('cliff').appendWith('s'),
-          PluralRule.ifMatches('oaf').appendWith('s'),
-          PluralRule.ifMatches('roof').appendWith('s'),
-          PluralRule.ifMatches('scuff').appendWith('s'),
-          PluralRule.ifMatches('sniff').appendWith('s'),
-          PluralRule.ifMatches('toff').appendWith('s'),
+  /// This method is part of a [Fluent interface](https://en.wikipedia.org/wiki/Fluent_interface)
+  /// Note that this method returns a modified copy!
+  PluralRuleSet addIrregularNouns(SingularToPlural irregularNouns) {
+    var newRule = IrregularNouns(
+      irregularNouns.map(
+        (key, value) => MapEntry(normalize(key), normalize(value)),
+      ),
+    );
+    var newRules = [newRule, ...rules];
+    return PluralRuleSet(newRules);
+  }
 
-          // replace -f with -ves e.g. wolf=>wolves
-          PluralRule.ifEndsWith('f').replaceSuffix('f', 'ves'),
+  /// This method is part of a [Fluent interface](https://en.wikipedia.org/wiki/Fluent_interface)
+  /// Note that this method returns a modified copy!
+  PluralRuleSet addExceptionToExistingRule<
+    RULE_TYPE_TO_FIND extends RuleWithExceptions
+  >(final SingularToPlural additionalExceptions) {
+    var matchingRules = rules.whereType<RULE_TYPE_TO_FIND>();
+    if (matchingRules.length != 1) {
+      throw ArgumentError('Could not find a single rule of type: T');
+    }
+    var rule = matchingRules.first;
+    var newRule = rule.copyWithAdditionalExceptions(additionalExceptions);
+    var newRules = [...rules];
+    var index = rules.indexOf(rule);
+    newRules.remove(rule);
+    newRules.insert(index, newRule);
+    return PluralRuleSet(newRules);
+  }
 
-          // replace -fe with -ves e.g. wife=>wives
-          PluralRule.ifEndsWith('fe').replaceSuffix('fe', 'ves'),
+  /// This method is part of a [Fluent interface](https://en.wikipedia.org/wiki/Fluent_interface)
+  /// Note that this method returns a modified copy!
+  PluralRuleSet addAsFirstRule<RULE_TYPE_TO_FIND extends PluralRule>(
+    PluralRule ruleToAdd,
+  ) {
+    var newRules = [ruleToAdd, ...rules];
+    return PluralRuleSet(newRules);
+  }
 
-          // replace -<consonant>y with -ies e.g. city=>cities
-          PluralRule.ifMatchedRegexp(
-                  _consonantExpression + 'y' + _endExpression)
-              .replaceSuffix('y', 'ies'),
+  /// This method is part of a [Fluent interface](https://en.wikipedia.org/wiki/Fluent_interface)
+  /// Note that this method returns a modified copy!
+  PluralRuleSet addRuleBefore<RULE_TYPE_TO_FIND extends PluralRule>(
+    PluralRule ruleToAdd,
+  ) {
+    var ruleGroupsAfter = rules.whereType<RULE_TYPE_TO_FIND>();
+    if (ruleGroupsAfter.isEmpty) {
+      throw ArgumentError('This PluralRuleGroup does not contain a: T');
+    }
+    var index = rules.indexOf(ruleGroupsAfter.first);
+    var newRules = [...rules];
+    newRules.insert(index, ruleToAdd);
+    return PluralRuleSet(newRules);
+  }
 
-          // exceptions on replace -<consonant>o with -oes
-          PluralRule.ifMatches('photo').replaceWith('photos'),
-          PluralRule.ifMatches('piano').replaceWith('pianos'),
-          PluralRule.ifMatches('halo').replaceWith('halos'),
+  /// This method is part of a [Fluent interface](https://en.wikipedia.org/wiki/Fluent_interface)
+  /// Note that this method returns a modified copy!
+  PluralRuleSet addRuleAfter<RULE_TYPE_TO_FIND extends PluralRule>(
+    PluralRule newRule,
+  ) {
+    var ruleGroupsAfter = rules.whereType<RULE_TYPE_TO_FIND>();
+    if (ruleGroupsAfter.isEmpty) {
+      throw ArgumentError('This PluralRules does not contain a: T');
+    }
+    var index = rules.indexOf(ruleGroupsAfter.last) + 1;
+    var newRuleGroups = [...rules];
+    newRuleGroups.insert(index, newRule);
+    return PluralRuleSet(newRuleGroups);
+  }
 
-          // replace -<consonant>o with -oes    e.g. potato=>potatoes
-          PluralRule.ifMatchedRegexp(
-                  _consonantExpression + 'o' + _endExpression)
-              .appendWith('es'),
+  /// This method is part of a [Fluent interface](https://en.wikipedia.org/wiki/Fluent_interface)
+  /// Note that this method returns a modified copy!
+  PluralRuleSet addAsLastRule<RULE_TYPE_TO_FIND extends PluralRule>(
+    PluralRule ruleToAdd,
+  ) {
+    var newRules = [...rules, ruleToAdd];
+    return PluralRuleSet(newRules);
+  }
 
-          // replace -is with -es  e.g. ellipsis=>ellipses
-          PluralRule.ifEndsWith('is').replaceSuffix('is', 'es'),
-
-          // replace -on with -a  e.g. criterion=>criteria
-          PluralRule.ifEndsWith('on').replaceSuffix('on', 'a'),
-
-          // replace -um with -a  e.g. datum=>data
-          PluralRule.ifEndsWith('um').replaceSuffix('um', 'a'),
-
-          // exception on replace -s with -ses
-          PluralRule.ifMatches('alumnus').replaceWith('alumni'),
-          PluralRule.ifMatches('cactus').replaceWith('cacti'),
-          PluralRule.ifMatches('corpus').replaceWith('corpora'),
-          PluralRule.ifMatches('fungus').replaceWith('fungi'),
-          PluralRule.ifMatches('gas').replaceWith('gasses'),
-          PluralRule.ifMatches('hippopotamus').replaceWith('hippopotamuses'),
-          PluralRule.ifMatches('nucleus').replaceWith('nuclei'),
-          PluralRule.ifMatches('stimulus').replaceWith('stimuli'),
-
-          // replace -s with -ses e.g. bus=>buses
-          PluralRule.ifEndsWith('s').appendWith('es'),
-
-          // replace -ss with -sses e.g. truss=>trusses
-          PluralRule.ifEndsWith('ss').appendWith('es'),
-
-          // replace -sh with -shes e.g. marsh=>marshes
-          PluralRule.ifEndsWith('sh').appendWith('es'),
-
-          // replace -ch with -ches e.g. lunch=>lunches
-          PluralRule.ifEndsWith('ch').appendWith('es'),
-
-          // exceptions on replace -x with -xes
-          PluralRule.ifMatches('appendix').replaceWith('appendices'),
-          PluralRule.ifMatches('codex').replaceWith('codices'),
-
-          // replace -x with -xes e.g. tax=>taxes
-          PluralRule.ifEndsWith('x').appendWith('es'),
-
-          // exceptions on replace -z with -zes
-          PluralRule.ifMatches('fez').replaceWith('fezzes'),
-          PluralRule.ifMatches('quiz').replaceWith('quizzes'),
-
-          // replace -z with -zes e.g. blitz=>blitzes
-          PluralRule.ifEndsWith('z').appendWith('es'),
-
-          //none of the other rules applied so we assume we can just append an s
-          PluralRule.appendSuffix('s'),
-        ]);
+  @override
+  bool appliesTo(String singularNoun) =>
+      rules.any((rule) => rule.appliesTo(singularNoun));
 
   @override
   String convertToPluralNoun(String singularNoun) {
-    String trimmedSingularNoun = singularNoun.trim();
-    CaseType caseType = CaseTypes().findFor(trimmedSingularNoun);
-    String normalizedSingularNoun = trimmedSingularNoun.toLowerCase();
-    PluralRule rule =
-        firstWhere((rule) => rule.appliesTo(normalizedSingularNoun));
-    var pluralNoun = rule.convertToPluralNoun(normalizedSingularNoun);
-    var casedPluralNoun = caseType.convert(pluralNoun);
-    return casedPluralNoun;
+    var rule = rules.firstWhere((rule) => rule.appliesTo(singularNoun));
+    return rule.convertToPluralNoun(singularNoun);
   }
+
+  String normalize(String noun) => noun.trim().toLowerCase();
+}
+
+typedef SingularToPlural =
+    Map<
+      /// singular noun
+      String,
+
+      /// plural noun
+      String
+    >;
+
+class RuleWithExceptions implements PluralRule {
+  final SingularToPlural exceptions;
+  final PluralRule baseRule;
+
+  RuleWithExceptions({required this.baseRule, required this.exceptions});
+
+  RuleWithExceptions copyWithAdditionalExceptions(
+    final SingularToPlural additionalExceptions,
+  ) => RuleWithExceptions(
+    baseRule: baseRule,
+    exceptions: {...exceptions, ...additionalExceptions},
+  );
+
+  @override
+  bool appliesTo(String singularNoun) =>
+      exceptions.containsKey(singularNoun) || baseRule.appliesTo(singularNoun);
+
+  @override
+  String convertToPluralNoun(String singularNoun) {
+    if (exceptions.containsKey(singularNoun)) {
+      return exceptions[singularNoun]!;
+    }
+    return baseRule.convertToPluralNoun(singularNoun);
+  }
+}
+
+class AppendSuffix implements PluralRule {
+  final String suffix;
+
+  AppendSuffix(this.suffix);
+
+  @override
+  bool appliesTo(String singularNoun) => true;
+
+  @override
+  String convertToPluralNoun(String singularNoun) => singularNoun + suffix;
+}
+
+class NounsThatDoNotChange implements PluralRule {
+  final List<String> nounsThatDoNotChange;
+
+  NounsThatDoNotChange(this.nounsThatDoNotChange);
+
+  @override
+  bool appliesTo(String singularNoun) =>
+      nounsThatDoNotChange.contains(singularNoun);
+
+  @override
+  String convertToPluralNoun(String noun) => noun;
+}
+
+class IrregularNouns implements PluralRule {
+  final SingularToPlural singularToPlural;
+
+  IrregularNouns(this.singularToPlural);
+
+  @override
+  bool appliesTo(String singularNoun) =>
+      singularToPlural.keys.contains(singularNoun);
+
+  @override
+  String convertToPluralNoun(String singularNoun) =>
+      singularToPlural[singularNoun]!;
+}
+
+class ConditionalPluralRule implements PluralRule {
+  final PluralPredicate pluralPredicate;
+  final PluralConverter converter;
+
+  ConditionalPluralRule(this.pluralPredicate, this.converter);
+  @override
+  bool appliesTo(String singularNoun) =>
+      pluralPredicate.appliesTo(singularNoun);
+
+  @override
+  String convertToPluralNoun(String singularNoun) =>
+      converter.convertToPluralNoun(singularNoun);
+}
+
+const consonantExpression = '[b-df-hj-np-tv-z]';
+const vowelExpression = '[aeiouáéíóúüAEIOUÁÉÍÓÚÜ]';
+const endExpression = '\$';
+
+/// [PluralRules] has been replaced with [PluralEngine] which can work with customized rules
+@Deprecated('use PluralEngine().convertToPluralNoun() instead')
+class PluralRules implements PluralConverter {
+  PluralRules();
+
+  final PluralEngine engine = PluralEngine();
+
+  @Deprecated('use PluralEngine().convertToPluralNoun() instead')
+  @override
+  String convertToPluralNoun(String singularNoun) =>
+      engine.convertToPluralNoun(singularNoun);
 }
