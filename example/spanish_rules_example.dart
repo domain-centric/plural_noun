@@ -84,9 +84,7 @@ class Replace_z_with_ces extends RuleWithExceptions {
 class Replace_vowel_with_vowelS extends RuleWithExceptions {
   Replace_vowel_with_vowelS()
     : super(
-        baseRule: PluralRule.ifMatchedRegexp(
-          vowelExpression,
-        ).appendWith('s'),
+        baseRule: PluralRule.ifMatchedRegexp(vowelExpression).appendWith('s'),
         exceptions: {
           // Add exceptions here if needed
         },

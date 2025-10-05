@@ -11,7 +11,10 @@ abstract class PluralPredicate {
       ConditionalPluralRule(this, ReplaceConverter(pluralNoun));
 
   PluralRule replaceSuffix(String suffixToFind, String suffixReplacement) =>
-      ConditionalPluralRule(this, ReplaceSuffixConverter(suffixToFind, suffixReplacement));
+      ConditionalPluralRule(
+        this,
+        ReplaceSuffixConverter(suffixToFind, suffixReplacement),
+      );
 
   PluralRule appendWith(String suffixToAppend) =>
       ConditionalPluralRule(this, AppendConverter(suffixToAppend));

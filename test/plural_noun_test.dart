@@ -216,7 +216,10 @@ void main() {
       expect(pluralEngine.convertToPluralNoun('gas'), 'gasses');
     });
     test('hippopotamus=>hippopotamuses', () {
-      expect(pluralEngine.convertToPluralNoun('hippopotamus'), 'hippopotamuses');
+      expect(
+        pluralEngine.convertToPluralNoun('hippopotamus'),
+        'hippopotamuses',
+      );
     });
     test('nucleus=>nuclei', () {
       expect(pluralEngine.convertToPluralNoun('nucleus'), 'nuclei');
@@ -294,9 +297,12 @@ void main() {
   group('Random tests', () {
     test('addendum=>addenda or addendums', () {
       expect(
-          ['addenda', 'addendums']
-              .contains(pluralEngine.convertToPluralNoun('addendum')),
-          true);
+        [
+          'addenda',
+          'addendums',
+        ].contains(pluralEngine.convertToPluralNoun('addendum')),
+        true,
+      );
     });
     test('aircraft=>aircraft', () {
       expect(pluralEngine.convertToPluralNoun('aircraft'), 'aircraft');
@@ -312,22 +318,30 @@ void main() {
     });
     test('antenna=>antennae or antennas', () {
       expect(
-          ['antennae', 'antennas']
-              .contains(pluralEngine.convertToPluralNoun('antenna')),
-          true);
+        [
+          'antennae',
+          'antennas',
+        ].contains(pluralEngine.convertToPluralNoun('antenna')),
+        true,
+      );
     });
     test('antithesis=>antitheses', () {
       expect(pluralEngine.convertToPluralNoun('antithesis'), 'antitheses');
     });
     test('apex=>apices or apexes', () {
-      expect(['apices', 'apexes'].contains(pluralEngine.convertToPluralNoun('apex')),
-          true);
+      expect(
+        ['apices', 'apexes'].contains(pluralEngine.convertToPluralNoun('apex')),
+        true,
+      );
     });
     test('appendix=>appendices or appendixes', () {
       expect(
-          ['appendices', 'appendixes']
-              .contains(pluralEngine.convertToPluralNoun('appendix')),
-          true);
+        [
+          'appendices',
+          'appendixes',
+        ].contains(pluralEngine.convertToPluralNoun('appendix')),
+        true,
+      );
     });
     test('axis=>axes', () {
       expect(pluralEngine.convertToPluralNoun('axis'), 'axes');
@@ -343,27 +357,40 @@ void main() {
     });
     test('beau=>beaux or beaus', () {
       expect(
-          ['beaux', 'beaus'].contains(pluralEngine.convertToPluralNoun('beau')), true);
+        ['beaux', 'beaus'].contains(pluralEngine.convertToPluralNoun('beau')),
+        true,
+      );
     });
     test('bison=>bison', () {
       expect(pluralEngine.convertToPluralNoun('bison'), 'bison');
     });
     test('bureau=>bureaux or bureaus', () {
       expect(
-          ['bureaux', 'bureaus'].contains(pluralEngine.convertToPluralNoun('bureau')),
-          true);
+        [
+          'bureaux',
+          'bureaus',
+        ].contains(pluralEngine.convertToPluralNoun('bureau')),
+        true,
+      );
     });
     test('cactus=>cacti or cactus or cactuses', () {
       expect(
-          ['cacti', 'cactus', 'cactuses']
-              .contains(pluralEngine.convertToPluralNoun('cactus')),
-          true);
+        [
+          'cacti',
+          'cactus',
+          'cactuses',
+        ].contains(pluralEngine.convertToPluralNoun('cactus')),
+        true,
+      );
     });
     test('château=>châteaux or châteaus', () {
       expect(
-          ['châteaux', 'châteaus']
-              .contains(pluralEngine.convertToPluralNoun('château')),
-          true);
+        [
+          'châteaux',
+          'châteaus',
+        ].contains(pluralEngine.convertToPluralNoun('château')),
+        true,
+      );
     });
     test('child=>children', () {
       expect(pluralEngine.convertToPluralNoun('child'), 'children');
@@ -379,32 +406,48 @@ void main() {
     });
     test('criterion=>criteria or criterions', () {
       expect(
-          ['criteria', 'criterions']
-              .contains(pluralEngine.convertToPluralNoun('criterion')),
-          true);
+        [
+          'criteria',
+          'criterions',
+        ].contains(pluralEngine.convertToPluralNoun('criterion')),
+        true,
+      );
     });
     test('curriculum=>curricula or curriculums', () {
       expect(
-          ['curricula', 'curriculums']
-              .contains(pluralEngine.convertToPluralNoun('curriculum')),
-          true);
+        [
+          'curricula',
+          'curriculums',
+        ].contains(pluralEngine.convertToPluralNoun('curriculum')),
+        true,
+      );
     });
     test('datum=>data', () {
       expect(pluralEngine.convertToPluralNoun('datum'), 'data');
     });
     test('deer=>deer or deers', () {
       expect(
-          ['deer', 'deers'].contains(pluralEngine.convertToPluralNoun('deer')), true);
+        ['deer', 'deers'].contains(pluralEngine.convertToPluralNoun('deer')),
+        true,
+      );
     });
     test('diagnosis=>diagnoses', () {
       expect(pluralEngine.convertToPluralNoun('diagnosis'), 'diagnoses');
     });
     test('die=>dice or dies', () {
-      expect(['dice', 'dies'].contains(pluralEngine.convertToPluralNoun('die')), true);
+      expect(
+        ['dice', 'dies'].contains(pluralEngine.convertToPluralNoun('die')),
+        true,
+      );
     });
     test('dwarf=>dwarves or dwarfs', () {
-      expect(['dwarves', 'dwarfs'].contains(pluralEngine.convertToPluralNoun('dwarf')),
-          true);
+      expect(
+        [
+          'dwarves',
+          'dwarfs',
+        ].contains(pluralEngine.convertToPluralNoun('dwarf')),
+        true,
+      );
     });
     test('ellipsis=>ellipses', () {
       expect(pluralEngine.convertToPluralNoun('ellipsis'), 'ellipses');
@@ -414,61 +457,96 @@ void main() {
     });
     test('fez=>fezzes or fezes', () {
       expect(
-          ['fezzes', 'fezes'].contains(pluralEngine.convertToPluralNoun('fez')), true);
+        ['fezzes', 'fezes'].contains(pluralEngine.convertToPluralNoun('fez')),
+        true,
+      );
     });
     test('fish=>fish or fishes', () {
       expect(
-          ['fish', 'fishes'].contains(pluralEngine.convertToPluralNoun('fish')), true);
+        ['fish', 'fishes'].contains(pluralEngine.convertToPluralNoun('fish')),
+        true,
+      );
     });
     test('focus=>foci or focuses', () {
-      expect(['foci', 'focuses'].contains(pluralEngine.convertToPluralNoun('focus')),
-          true);
+      expect(
+        ['foci', 'focuses'].contains(pluralEngine.convertToPluralNoun('focus')),
+        true,
+      );
     });
     test('foot=>feet or foot', () {
       expect(
-          ['feet', 'foot'].contains(pluralEngine.convertToPluralNoun('foot')), true);
+        ['feet', 'foot'].contains(pluralEngine.convertToPluralNoun('foot')),
+        true,
+      );
     });
     test('formula=>formulae or formulas', () {
       expect(
-          ['formulae', 'formulas']
-              .contains(pluralEngine.convertToPluralNoun('formula')),
-          true);
+        [
+          'formulae',
+          'formulas',
+        ].contains(pluralEngine.convertToPluralNoun('formula')),
+        true,
+      );
     });
     test('fungus=>fungi or funguses', () {
       expect(
-          ['fungi', 'funguses'].contains(pluralEngine.convertToPluralNoun('fungus')),
-          true);
+        [
+          'fungi',
+          'funguses',
+        ].contains(pluralEngine.convertToPluralNoun('fungus')),
+        true,
+      );
     });
     test('genus=>genera or genuses', () {
-      expect(['genera', 'genuses'].contains(pluralEngine.convertToPluralNoun('genus')),
-          true);
+      expect(
+        [
+          'genera',
+          'genuses',
+        ].contains(pluralEngine.convertToPluralNoun('genus')),
+        true,
+      );
     });
     test('goose=>geese', () {
       expect(pluralEngine.convertToPluralNoun('goose'), 'geese');
     });
     test('grouse=>grouse or grouses', () {
       expect(
-          ['grouse', 'grouses'].contains(pluralEngine.convertToPluralNoun('grouse')),
-          true);
+        [
+          'grouse',
+          'grouses',
+        ].contains(pluralEngine.convertToPluralNoun('grouse')),
+        true,
+      );
     });
     test('half=>halves', () {
       expect(pluralEngine.convertToPluralNoun('half'), 'halves');
     });
     test('hoof=>hooves or hoofs', () {
-      expect(['hooves', 'hoofs'].contains(pluralEngine.convertToPluralNoun('hoof')),
-          true);
+      expect(
+        ['hooves', 'hoofs'].contains(pluralEngine.convertToPluralNoun('hoof')),
+        true,
+      );
     });
     test('hypothesis=>hypotheses', () {
       expect(pluralEngine.convertToPluralNoun('hypothesis'), 'hypotheses');
     });
     test('index=>indices or indexes', () {
       expect(
-          ['indices', 'indexes'].contains(pluralEngine.convertToPluralNoun('index')),
-          true);
+        [
+          'indices',
+          'indexes',
+        ].contains(pluralEngine.convertToPluralNoun('index')),
+        true,
+      );
     });
     test('larva=>larvae or larvas', () {
-      expect(['larvae', 'larvas'].contains(pluralEngine.convertToPluralNoun('larva')),
-          true);
+      expect(
+        [
+          'larvae',
+          'larvas',
+        ].contains(pluralEngine.convertToPluralNoun('larva')),
+        true,
+      );
     });
     test('loaf=>loaves', () {
       expect(pluralEngine.convertToPluralNoun('loaf'), 'loaves');
@@ -478,19 +556,30 @@ void main() {
     });
     test('matrix=>matrices or matrixes', () {
       expect(
-          ['matrices', 'matrixes']
-              .contains(pluralEngine.convertToPluralNoun('matrix')),
-          true);
+        [
+          'matrices',
+          'matrixes',
+        ].contains(pluralEngine.convertToPluralNoun('matrix')),
+        true,
+      );
     });
     test('medium=>media or mediums', () {
-      expect(['media', 'mediums'].contains(pluralEngine.convertToPluralNoun('medium')),
-          true);
+      expect(
+        [
+          'media',
+          'mediums',
+        ].contains(pluralEngine.convertToPluralNoun('medium')),
+        true,
+      );
     });
     test('memorandum=>memoranda or memorandums', () {
       expect(
-          ['memoranda', 'memorandums']
-              .contains(pluralEngine.convertToPluralNoun('memorandum')),
-          true);
+        [
+          'memoranda',
+          'memorandums',
+        ].contains(pluralEngine.convertToPluralNoun('memorandum')),
+        true,
+      );
     });
     test('moose=>moose', () {
       expect(pluralEngine.convertToPluralNoun('moose'), 'moose');
@@ -500,42 +589,60 @@ void main() {
     });
     test('nebula=>nebulae or nebulas', () {
       expect(
-          ['nebulae', 'nebulas'].contains(pluralEngine.convertToPluralNoun('nebula')),
-          true);
+        [
+          'nebulae',
+          'nebulas',
+        ].contains(pluralEngine.convertToPluralNoun('nebula')),
+        true,
+      );
     });
     test('nucleus=>nuclei or nucleuses', () {
       expect(
-          ['nuclei', 'nucleuses']
-              .contains(pluralEngine.convertToPluralNoun('nucleus')),
-          true);
+        [
+          'nuclei',
+          'nucleuses',
+        ].contains(pluralEngine.convertToPluralNoun('nucleus')),
+        true,
+      );
     });
     test('oasis=>oases', () {
       expect(pluralEngine.convertToPluralNoun('oasis'), 'oases');
     });
     test('offspring=>offspring or offsprings', () {
       expect(
-          ['offspring', 'offsprings']
-              .contains(pluralEngine.convertToPluralNoun('offspring')),
-          true);
+        [
+          'offspring',
+          'offsprings',
+        ].contains(pluralEngine.convertToPluralNoun('offspring')),
+        true,
+      );
     });
     test('opus=>opera or opuses', () {
-      expect(['opera', 'opuses'].contains(pluralEngine.convertToPluralNoun('opus')),
-          true);
+      expect(
+        ['opera', 'opuses'].contains(pluralEngine.convertToPluralNoun('opus')),
+        true,
+      );
     });
     test('ovum=>ova', () {
       expect(pluralEngine.convertToPluralNoun('ovum'), 'ova');
     });
     test('ox=>oxen or ox', () {
-      expect(['oxen', 'ox'].contains(pluralEngine.convertToPluralNoun('ox')), true);
+      expect(
+        ['oxen', 'ox'].contains(pluralEngine.convertToPluralNoun('ox')),
+        true,
+      );
     });
     test('parenthesis=>parentheses', () {
       expect(pluralEngine.convertToPluralNoun('parenthesis'), 'parentheses');
     });
     test('phenomenon=>phenomena or phenomenons', () {
       expect(
-          ['phenomena', 'phenomenons']
-              .contains(pluralEngine.convertToPluralNoun('phenomenon')),
-          true);
+        [
+          'phenomena',
+          'phenomenons',
+        ].contains(pluralEngine.convertToPluralNoun('phenomenon')),
+        true,
+      );
     });
     test('phylum=>phyla', () {
       expect(pluralEngine.convertToPluralNoun('phylum'), 'phyla');
@@ -545,23 +652,39 @@ void main() {
     });
     test('radius=>radii or radiuses', () {
       expect(
-          ['radii', 'radiuses'].contains(pluralEngine.convertToPluralNoun('radius')),
-          true);
+        [
+          'radii',
+          'radiuses',
+        ].contains(pluralEngine.convertToPluralNoun('radius')),
+        true,
+      );
     });
     test('referendum=>referenda or referendums', () {
       expect(
-          ['referenda', 'referendums']
-              .contains(pluralEngine.convertToPluralNoun('referendum')),
-          true);
+        [
+          'referenda',
+          'referendums',
+        ].contains(pluralEngine.convertToPluralNoun('referendum')),
+        true,
+      );
     });
     test('salmon=>salmon or salmons', () {
       expect(
-          ['salmon', 'salmons'].contains(pluralEngine.convertToPluralNoun('salmon')),
-          true);
+        [
+          'salmon',
+          'salmons',
+        ].contains(pluralEngine.convertToPluralNoun('salmon')),
+        true,
+      );
     });
     test('scarf=>scarves or scarfs', () {
-      expect(['scarves', 'scarfs'].contains(pluralEngine.convertToPluralNoun('scarf')),
-          true);
+      expect(
+        [
+          'scarves',
+          'scarfs',
+        ].contains(pluralEngine.convertToPluralNoun('scarf')),
+        true,
+      );
     });
     test('self=>selves', () {
       expect(pluralEngine.convertToPluralNoun('self'), 'selves');
@@ -574,8 +697,12 @@ void main() {
     });
     test('shrimp=>shrimp or shrimps', () {
       expect(
-          ['shrimp', 'shrimps'].contains(pluralEngine.convertToPluralNoun('shrimp')),
-          true);
+        [
+          'shrimp',
+          'shrimps',
+        ].contains(pluralEngine.convertToPluralNoun('shrimp')),
+        true,
+      );
     });
     test('species=>species', () {
       expect(pluralEngine.convertToPluralNoun('species'), 'species');
@@ -588,24 +715,33 @@ void main() {
     });
     test('syllabus=>syllabi or syllabuses', () {
       expect(
-          ['syllabi', 'syllabuses']
-              .contains(pluralEngine.convertToPluralNoun('syllabus')),
-          true);
+        [
+          'syllabi',
+          'syllabuses',
+        ].contains(pluralEngine.convertToPluralNoun('syllabus')),
+        true,
+      );
     });
     test('symposium=>symposia or symposiums', () {
       expect(
-          ['symposia', 'symposiums']
-              .contains(pluralEngine.convertToPluralNoun('symposium')),
-          true);
+        [
+          'symposia',
+          'symposiums',
+        ].contains(pluralEngine.convertToPluralNoun('symposium')),
+        true,
+      );
     });
     test('synopsis=>synopses', () {
       expect(pluralEngine.convertToPluralNoun('synopsis'), 'synopses');
     });
     test('tableau=>tableaux or tableaus', () {
       expect(
-          ['tableaux', 'tableaus']
-              .contains(pluralEngine.convertToPluralNoun('tableau')),
-          true);
+        [
+          'tableaux',
+          'tableaus',
+        ].contains(pluralEngine.convertToPluralNoun('tableau')),
+        true,
+      );
     });
     test('thesis=>theses', () {
       expect(pluralEngine.convertToPluralNoun('thesis'), 'theses');
@@ -617,34 +753,52 @@ void main() {
       expect(pluralEngine.convertToPluralNoun('tooth'), 'teeth');
     });
     test('trout=>trout or trouts', () {
-      expect(['trout', 'trouts'].contains(pluralEngine.convertToPluralNoun('trout')),
-          true);
+      expect(
+        ['trout', 'trouts'].contains(pluralEngine.convertToPluralNoun('trout')),
+        true,
+      );
     });
     test('tuna=>tuna or tunas', () {
       expect(
-          ['tuna', 'tunas'].contains(pluralEngine.convertToPluralNoun('tuna')), true);
+        ['tuna', 'tunas'].contains(pluralEngine.convertToPluralNoun('tuna')),
+        true,
+      );
     });
     test('vertebra=>vertebrae or vertebras', () {
       expect(
-          ['vertebrae', 'vertebras']
-              .contains(pluralEngine.convertToPluralNoun('vertebra')),
-          true);
+        [
+          'vertebrae',
+          'vertebras',
+        ].contains(pluralEngine.convertToPluralNoun('vertebra')),
+        true,
+      );
     });
     test('vertex=>vertices or vertexes', () {
       expect(
-          ['vertices', 'vertexes']
-              .contains(pluralEngine.convertToPluralNoun('vertex')),
-          true);
+        [
+          'vertices',
+          'vertexes',
+        ].contains(pluralEngine.convertToPluralNoun('vertex')),
+        true,
+      );
     });
     test('vortex=>vortices or vortexes', () {
       expect(
-          ['vortices', 'vortexes']
-              .contains(pluralEngine.convertToPluralNoun('vortex')),
-          true);
+        [
+          'vortices',
+          'vortexes',
+        ].contains(pluralEngine.convertToPluralNoun('vortex')),
+        true,
+      );
     });
     test('wharf=>wharves or wharfs', () {
-      expect(['wharves', 'wharfs'].contains(pluralEngine.convertToPluralNoun('wharf')),
-          true);
+      expect(
+        [
+          'wharves',
+          'wharfs',
+        ].contains(pluralEngine.convertToPluralNoun('wharf')),
+        true,
+      );
     });
     test('wife=>wives', () {
       expect(pluralEngine.convertToPluralNoun('wife'), 'wives');

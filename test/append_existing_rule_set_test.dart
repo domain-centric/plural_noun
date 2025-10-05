@@ -95,8 +95,9 @@ void main() {
       });
 
       test('Add after the last rule of an existing ruleSet', () {
-        var modifiedRuleSet = EnglishPluralRuleSet()
-            .addRuleAfter<AppendSuffix>(MyCustomRule('after_last'));
+        var modifiedRuleSet = EnglishPluralRuleSet().addRuleAfter<AppendSuffix>(
+          MyCustomRule('after_last'),
+        );
         modifiedRuleSet.rules.last.should
             .beOfType<MyCustomRule>()!
             .appliesTo('after_last')

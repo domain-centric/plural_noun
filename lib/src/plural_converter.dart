@@ -4,8 +4,6 @@ abstract class PluralConverter {
   String convertToPluralNoun(String singularNoun);
 }
 
-
-
 /// Returns the same noun, since the singular noun is the same as a plural noun.
 /// E.g.: deer
 class NoChangeConverter extends PluralConverter {
@@ -33,7 +31,7 @@ class ReplaceSuffixConverter extends PluralConverter {
   final String suffixReplacement;
 
   ReplaceSuffixConverter(String suffixExpressionToFind, this.suffixReplacement)
-      : suffixExpression = RegExp("$suffixExpressionToFind\$");
+    : suffixExpression = RegExp("$suffixExpressionToFind\$");
 
   @override
   String convertToPluralNoun(String singularNoun) =>

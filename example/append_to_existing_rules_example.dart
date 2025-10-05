@@ -1,7 +1,7 @@
 import 'package:plural_noun/plural_noun.dart';
 
 final extendedRules = EnglishPluralRuleSet()
-    .addNounsThatDoesNotChange(['offspring', ])
+    .addNounsThatDoesNotChange(['offspring'])
     .addIrregularNouns({'larva': 'larvae'})
     .addExceptionToExistingRule<Replace_consonantO_with_oes>({
       'embryo': 'embryos',

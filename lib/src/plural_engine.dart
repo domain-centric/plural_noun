@@ -1,6 +1,5 @@
 import 'package:plural_noun/plural_noun.dart';
 
-
 /// A wrapper around a [PluralRuleSet] that ensures:
 /// * spaces in the input are trimmed off
 /// * the input is case unsensitive (is converted to lowercase)
