@@ -2,6 +2,10 @@ name: plural_noun
 description: Converts a English singular noun to a plural noun using a set of rules.
 version: 0.2.0
 repository: https://github.com/domain-centric/plural_noun
+issue_tracker: https://github.com/domain-centric/plural_noun/issues
+
+topics:
+  - pluralization
 
 environment:
   sdk: ^3.8.0
