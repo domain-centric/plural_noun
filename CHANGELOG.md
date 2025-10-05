@@ -1,3 +1,7 @@
+## [0.2.1]
+
+* See https://github.com/domain-centric/plural_noun/milestone/1?closed=3
+
 ## [0.2.0]
 
 * See https://github.com/domain-centric/plural_noun/milestone/1?closed=2
